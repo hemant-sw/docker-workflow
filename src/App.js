@@ -15,8 +15,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React with me aka (hemantsw)
         </a>
+        <p>{`hello ${process.env.REACT_APP_NAME} `}</p>
+        <p>{`eating ${process.env.CHINESE_FOOD}`}</p>
       </header>
     </div>
   );

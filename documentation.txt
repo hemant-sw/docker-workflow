@@ -1,0 +1,49 @@
+TO create image of any repo or project.
+1- first we have to create a docker file 
+   - Docker file should be name as Dockerfile
+   - In docker file we write all step required to run in order to run our app perfectly 
+   - Docker file should be hidden when we docekerizing our app for that we make docker ignore file
+     (.dockerignore) in this we write all files that should be hidden.
+
+2- To make image of our current project we use command
+       ( docker build -t image-name .)
+    - Above command will create iamge of our project 
+    - To view all images that are present either you can see from docker desktop app or by running
+     a command (docker image ls)
+     - this command will list all the images present inside our system
+
+3 - After creating image of your project next you need to run it to do that you need to run a command
+   ( docker run -d --name my-app my-image)
+    - But with this command you will not able to run it on your browser, to run in browser you need to
+      specify port for that use command 
+      ( docker run -d -p 3000:3000 --name my-app my-image)
+    - By use this command you can run it on your browser (localhost:3000)
+    
+4 - We almost all done but problem is that when we make any changers in our app it will not to goingt s
+    show in our browser that is because we have created iamge of our project before we make that changes 
+    (image created on 11:00 PM but we make changes after 11:00 PM) to view those changes again we have to
+    to delete the running container to delete container use this command (docker rm my-app-name -f )
+
+  - After that you also need to delete iamge - to delete image use this command (docker image rm my-image)
+
+  - And you again need repeat the whole step like create image run that in browsser after that you will se
+    your changer and that is very hectic process.
+
+  - To over come this issue for that we use Volumes (bind mounts).
+
+  - To save changes locally we use another command for that we need to delete the running container and use this command
+    ( docker run -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image) use this command in powershell
+
+  - But in windows to view changes on browser use this
+    (docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image ) 
+
+5 - But this data should be in read-only format beacuse after development we don't want any changes in our project for that run
+    this command
+    ( docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src:ro -d -p 3000:3000 --name my-app my-image)
+
+6 - To make our command cleaner we use separate enviromental variable file
+  - Create a fil (.env and wite all your en variable in  it)
+
+
+       
+      
