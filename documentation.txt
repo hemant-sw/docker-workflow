@@ -44,6 +44,35 @@ TO create image of any repo or project.
 6 - To make our command cleaner we use separate enviromental variable file
   - Create a fil (.env and wite all your en variable in  it)
 
+7 - To simplify our CLI more we create one more file (yaml file) and we name as [ docker-compose.yaml ] and in this file we but all necessary
+    like -
+          version: "3"
+          services:
+           react-app:
+              build:
+              context: .
+              dockerfile: Dockerfile.dev
+          ports:
+              - "3000:3000"
+          volumes:
+              - ./src:/app/src
+          environment:
+              - REACT_APP_NAME=hemant
+              - CHINESE_FOOD= rtuoh
+              - WATCHPACK_POLLING=TRUE
+
+  - After creating this yaml file we don't need to use any leanthy run commands.
+  - To run our all services and container we just use this command
+     { docker-compose up -d}
+  - But with this command we just run our container but when we make changes in our dockerfile it will not be synced in our images.
+  - To overcome this issue we have to build a brand new image every time when we up the container for this use this command.
+      { docker-compose up -d --build } 
+  - To bring all container down we have to use this comamnd 
+      { docker-compose down}    
+
+          
+            
+
 
        
       

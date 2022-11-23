@@ -6,4 +6,4 @@ COPY . .
 ENV CHINESE_FOOD=goodFood
 ENV REACT_APP_NAME=myName 
 EXPOSE 3000
-CMD ["npm","start"]
+CMD ["npm","start"] 
