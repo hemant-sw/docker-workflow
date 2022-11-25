@@ -69,6 +69,16 @@ TO create image of any repo or project.
       { docker-compose up -d --build } 
   - To bring all container down we have to use this comamnd 
       { docker-compose down}    
+      
+  - To push image on docker hub 
+      - First you have to login in your docker by typing  this command
+        [ docker login --username=<user username> --password=<user password> ]
+      - After that use this command -
+        [ docker tag my-image username/my-repo ] { You will have to create a repo in docker hub}
+      - At last you just need to push it by using this command
+        [ docker push username/my-repo ]
+      - All done
+      
 
           
             
