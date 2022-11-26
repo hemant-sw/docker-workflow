@@ -1,9 +1,12 @@
-TO create image of any repo or project.
+To create image of any repo or project.
+
+
 1- first we have to create a docker file 
    - Docker file should be name as Dockerfile
    - In docker file we write all step required to run in order to run our app perfectly 
    - Docker file should be hidden when we docekerizing our app for that we make docker ignore file
      (.dockerignore) in this we write all files that should be hidden.
+
 
 2- To make image of our current project we use command
        ( docker build -t image-name .)
@@ -12,39 +15,60 @@ TO create image of any repo or project.
      a command (docker image ls)
      - this command will list all the images present inside our system
 
-3 - After creating image of your project next you need to run it to do that you need to run a command
+To run image -     
+
+
+1 - After creating image of your project next you need to run it to do that you need to run a command
    ( docker run -d --name my-app my-image)
     - But with this command you will not able to run it on your browser, to run in browser you need to
       specify port for that use command 
       ( docker run -d -p 3000:3000 --name my-app my-image)
     - By use this command you can run it on your browser (localhost:3000)
+
+
+To sync our codes by using Bind mounts - 
+
     
-4 - We almost all done but problem is that when we make any changers in our app it will not to goingt s
-    show in our browser that is because we have created iamge of our project before we make that changes 
+1 - We almost all done but problem is that when we make any changers in our app it will not to going to 
+    show in our browser that is because we have created image of our project before we make that changes 
     (image created on 11:00 PM but we make changes after 11:00 PM) to view those changes again we have to
-    to delete the running container to delete container use this command (docker rm my-app-name -f )
+    to delete the running container 
+    
+  - To delete container use this command 
+    [ docker rm my-app-name -f ]
 
-  - After that you also need to delete iamge - to delete image use this command (docker image rm my-image)
+  - After that you also need to delete image - to delete image use this command 
+    [ docker image rm my-image ] 
 
-  - And you again need repeat the whole step like create image run that in browsser after that you will se
+  - And you again need repeat the whole step like create image & run that in browser after that you will see
     your changer and that is very hectic process.
 
   - To over come this issue for that we use Volumes (bind mounts).
 
   - To save changes locally we use another command for that we need to delete the running container and use this command
-    ( docker run -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image) use this command in powershell
+    [ docker run -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image ] use this command in powershell
 
   - But in windows to view changes on browser use this
-    (docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image ) 
+    [ docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src -d -p 3000:3000 --name my-app my-image ] 
 
-5 - But this data should be in read-only format beacuse after development we don't want any changes in our project for that run
+To make Read only Bind-Mounts - 
+
+1 - This data should be in read-only format beacuse after development we don't want any changes in our project for that run
     this command
-    ( docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src:ro -d -p 3000:3000 --name my-app my-image)
+    [ docker run -e WATCHPACK_POLLING=true -v ${pwd}/src:/app/src:ro -d -p 3000:3000 --name my-app my-image ]
 
-6 - To make our command cleaner we use separate enviromental variable file
+Command line are very long and hard to write to make cmd line cleaner we use files.
+
+* During development process we use this files 
+    -  Dockerfile
+    -  docker-compose.yaml
+    - .dockerignore
+    - .env
+
+1 - To make our command cleaner we use separate enviromental variable file
   - Create a fil (.env and wite all your en variable in  it)
 
-7 - To simplify our CLI more we create one more file (yaml file) and we name as [ docker-compose.yaml ] and in this file we but all necessary
+2 - To simplify our CLI more we create one more file (yaml file) and we name as [ docker-compose.yaml ] and in this file we but all necessary
     like -
           version: "3"
           services:
@@ -78,6 +102,18 @@ TO create image of any repo or project.
       - At last you just need to push it by using this command
         [ docker push username/my-repo ]
       - All done
+
+  - To pull image from docker hub -
+      - Fist go to dockerhub and search specfic image name which you want to pull.
+      - After when you entered in the repo you will see option -pull this image-
+      - Just copy that line of code and go to your terminal.
+      - In terminal just  paste pull command that you have copied
+      - And image is created to see iamge just enter this command
+        [ docker images] - it will list all the images
+      - To run that image in your system use this command -
+        [ docker run -d -p <port:port <image-Id ]
+      - All done
+
       
 
           
